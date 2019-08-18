@@ -28,3 +28,17 @@ server.get('/', (req, res) => {
   res.send(`<h2>Hello World!</h2><p><a href="./api/projects">Projects</a></p><p><a href="./api/actions">Actions</a></p>`)
 });
 
+server.use((error, req, res, next) => {
+  let errorMessage = "Error occured: ";
+
+  switch (error.code) {
+    case 400: errorMessage = errorMessage + "You made a Bad Request. " + error.message;
+      break;
+    case 404: errorMessage = errorMessage + "You made a Bad Request. " + error.message;
+      break;
+    default: errorMessage = errorMessage + "Oh my! " + error.message;
+  }
+  res.status(error.code).json({ 
+    message: errorMessage
+  });
+});
