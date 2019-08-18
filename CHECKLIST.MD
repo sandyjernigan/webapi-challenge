@@ -9,7 +9,7 @@ In this challenge, create a web API around the following resources: `Projects` a
 Follow these steps to set up and work on your project:
 
 - [x] Create a forked copy of this project.
-- [ ] Add your _Project Manager_ as collaborator on Github.
+- [x] Add your _Project Manager_ as collaborator on Github.
 - [x] Clone your forked version of the Repository.
 - [x] Create a new Branch on the clone: git checkout -b `<firstName-lastName>`.
 - [x] Implement the project on this Branch, committing changes regularly.
@@ -17,9 +17,8 @@ Follow these steps to set up and work on your project:
 
 Follow these steps for completing your project.
 
-- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master on your fork. **Please don't merge your own pull request.**
-- [ ] Add your _Project Manager_ as a Reviewer on the Pull-request
-- [ ] Your _Project Manager_ will count the challenge as done by merging the branch into _master_.  
+- [x] Submit a Pull-Request to merge <firstName-lastName> Branch into master on your fork. **Please don't merge your own pull request.**
+- [ ] Add your _Project Manager_ as a Reviewer on the Pull-request 
 
 ## Database Persistence Helpers
 
@@ -54,7 +53,7 @@ _projects_
  - [ ] Read
  - [ ] Update
  - [ ] Delete
- 
+
 - [ ] Retrieve the list of actions for a project.
 
 ### Database Schemas
