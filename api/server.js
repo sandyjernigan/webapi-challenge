@@ -42,3 +42,5 @@ server.use((error, req, res, next) => {
     message: errorMessage
   });
 });
+
+module.exports = server;
