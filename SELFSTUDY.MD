@@ -6,6 +6,8 @@
 
 - [ ] Describe Middleware?
 
+> Middleware allows the use of interjecting code between another function. It can access the request and response objects submitted and execute code that makes changes to these objects. It can stop the function before it gets started or call the middlewark based on the order the middleware is entered. Middleware is used in a lot of different programming languages. In express, one good way to use middleware is as error checking resources. It can check the inputted data to verify it is valid before running the function. 
+
 - [ ] Describe a Resource?
 
 - [ ] What can the API return to help clients know if a request was successful?
