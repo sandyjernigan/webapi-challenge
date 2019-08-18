@@ -14,5 +14,7 @@
 
 - [ ] What can the API return to help clients know if a request was successful?
 
+> APIs can return HTTP Status codes based on the request results. Status Codes in the 200s are for successful responses. API can return other results as well depending on the request. The is a wide array of things the API can return. For example, a request of information from a database can return a 200 status and a JSON object of the results, or a HTTP status of 404, if the object information is not found.
+
 - [ ] How can we partition our application into sub-applications?
 
