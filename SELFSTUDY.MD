@@ -10,6 +10,8 @@
 
 - [ ] Describe a Resource?
 
+> Resources for Express routing are pulled using the url and http method. Allowing for the use of Create, Read, Update, and Destory to be implemented based on the url (only 1 url per resource) called. Resources can have multiple renditions depending on the call.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
 - [ ] How can we partition our application into sub-applications?
