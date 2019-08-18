@@ -18,3 +18,5 @@
 
 - [ ] How can we partition our application into sub-applications?
 
+> Express is a flexibile framework, therefore it allows the programmer the ability to split the code into sub-applications. For example, different database requests can be subdivided into different apps based on the url call. So the code for a call to the users database would be in one file and have it's own set of applications in that file, while the code for the blog is in another file but does not necessarily have to overlap with the users application.  
+> In our code, we have been using routers which are required into our base file and then using `server.use` function to tell the base application when and how to utilize the sub-applications.
