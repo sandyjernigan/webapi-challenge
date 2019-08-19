@@ -71,6 +71,8 @@ router.put('/:id', validateById, async (req, res, next) => {
   // `remove()`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
 //#endregion
 
+
+//#region - Custom Middleware
 async function validateById(req, res, next) {
   const { id } = req.params
   try {
@@ -116,5 +118,6 @@ function validateInput(req, res, next) {
       next({ code: 400, message: "Request is missing data." });
   }
 };
+//#endregion
 
 module.exports = router;
