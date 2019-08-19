@@ -74,6 +74,7 @@ async function validateById(req, res, next) {
   }
 };
 
+function validateInput(req, res, next) {
   const { body } = req
   const errMsg = { message: "" }
 
