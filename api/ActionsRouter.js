@@ -12,6 +12,17 @@ const DB = require('../data/helpers/actionModel.js');
 //#region - READ
   // `get()`: calling get returns an array of all the resources contained in the database. If you pass an `id` to this method it will return the resource with that id if one is found.
 
+// Read All - Returns an array of all actions
+router.get('/', async (req, res, next) => {
+  try {
+    const results = await DB.get();
+    res.status(200).json(results);
+  } catch (error) {
+    console.log(error);
+    next({ code: 500, message: "The information could not be retrieved." });
+  }
+});
+
 //#endregion
 
 //#region - UPDATE 
