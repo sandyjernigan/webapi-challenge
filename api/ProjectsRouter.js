@@ -73,7 +73,6 @@ router.put('/:id', validateById, async (req, res, next) => {
   try {
     const updateResults = await DB.update(req.params.id, req.body);
     if (updateResults) {
-      //const results = await DB.get(req.params.id);
       res.status(200).json(updateResults); // return HTTP status code 200 (OK) and the newly updated resource.
     } else {
       next({ code: 404, message: "The project could not be found." });
