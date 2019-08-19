@@ -19,11 +19,32 @@ router.get('/', async (req, res, next) => {
     res.status(200).json(results);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "The information could not be retrieved." });
+    next({ code: 500, message: "The information could not be retrieved." });
   }
 });
 
-  // The `projectModel.js` helper includes an extra method called `getProjectActions()` that takes a _project id_ as it's only argument and returns a list of all the _actions_ for the _project_.
+// Read by ID - Returns the project object with the specified id.
+router.get('/:id', validateById, (req, res, next) => {
+  res.status(200).json(req.results);
+});
+
+// Read by Project ID and return a list of all the actions for the project
+  // `getProjectActions()` that takes a _project id_ as it's only argument and returns a list of all the _actions_ for the _project_
+router.get('/:id/actions', validateById, async (req, res, next) => {
+  try {
+    if(req.results) { 
+      const results = await DB.getProjectActions(req.params.id);
+      if (!results) { // Error 404
+        next({ code: 404, message: "No actions found." }); 
+      } else { // (else) return actions
+        res.status(200).json(results);
+      }
+    }
+  } catch (error) {  // console and Error 500
+    console.log(error);
+    next({ code: 500, message: "The information could not be retrieved." });
+  }
+});
 
 //#endregion
 
@@ -33,6 +54,30 @@ router.get('/', async (req, res, next) => {
 
 //#region - DELETE 
   // `remove()`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
+//#endregion
+
+
+//#region - Custom Middleware
+
+async function validateById(req, res, next) {
+  const { id } = req.params
+  try {
+    const results = await DB.get(id);
+
+    // If object for the specified id is not found:
+    if (!results || Object.keys(results).length === 0) {
+      next({ code: 400, message: `Invalid Results for ID: ${id}`});
+    } else {
+      req.results = results;
+      next();
+    }
+  } catch (error) {
+    // If there's an error in retrieving results from the database:
+    console.log(error);
+    next({ code: 500, message: "The information could not be retrieved." });
+  }
+};
+
 //#endregion
 
 module.exports = router;
