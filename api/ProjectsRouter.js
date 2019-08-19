@@ -94,7 +94,7 @@ router.delete('/:id', validateById, async (req, res, next) => {
     const results = await DB.get(req.params.id);
     const deleteResults = await DB.remove(req.params.id);
     if (deleteResults === 1) {
-      res.status(200).json({ results, message: 'Delete post was successful.' });
+      res.status(200).json({ results, message: 'Delete project was successful.' });
     } else if (deleteResults > 1) {
       next({ code: 404, message: `More than one project was removed. ${deleteResults} were removed.` });
     } else {
