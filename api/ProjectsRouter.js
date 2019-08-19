@@ -92,7 +92,6 @@ router.put('/:id', validateById, async (req, res, next) => {
 router.delete('/:id', validateById, async (req, res, next) => {
   try {
     const results = await DB.get(req.params.id);
-    console.log(results)
     const deleteResults = await DB.remove(req.params.id);
     if (deleteResults === 1) {
       res.status(200).json({ results, message: 'Delete post was successful.' });
