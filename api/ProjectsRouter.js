@@ -7,6 +7,23 @@ const DB = require('../data/helpers/projectModel.js');
 //#region - CREATE 
   // `insert()`: calling insert passing it a resource object will add it to the database and return the newly created resource.
 
+// Creates resource using the information sent inside the request body.
+router.post('/', validateInput, async (req, res, next) => {
+  try {
+    const insertResults = await DB.insert(req.body);
+
+    // check that the resource was added
+    if (insertResults) {
+      res.status(201).json(insertResults); // return HTTP status code 201 (Created)
+    } else {
+      next({ code: 404, message: "There was an error while saving the information." });
+    }
+
+  } catch (error) {
+    console.log(error);
+    next({ code: 500, message: "There was an error while adding to the database." });
+  }
+});
 //#endregion
 
 //#region - READ
@@ -75,6 +92,27 @@ async function validateById(req, res, next) {
     // If there's an error in retrieving results from the database:
     console.log(error);
     next({ code: 500, message: "The information could not be retrieved." });
+  }
+};
+
+function validateInput(req, res, next) {
+  const { body } = req
+
+  // Projects have a name (string), description (string), and completed (boolean - not required)
+
+  if (body && Object.keys(body).length > 0) {
+    if (body.name && body.description) {
+      req.body = body;
+      next();
+    } else if (!body.name) {
+      next({ code: 400, message: "Request is missing required name field." });
+    } else if (!body.description) {
+      next({ code: 400, message: "Request is missing required description field." });
+    } else {
+      next({ code: 400, message: "Request is missing data." });
+    }
+  } else {
+      next({ code: 400, message: "Request is missing data." });
   }
 };
 
