@@ -23,6 +23,11 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// Read by ID - Returns the action for the specified id.
+router.get('/:id', validateById, (req, res, next) => {
+  res.status(200).json(req.results);
+});
+
 //#endregion
 
 //#region - UPDATE 
@@ -32,5 +37,24 @@ router.get('/', async (req, res, next) => {
 //#region - DELETE 
   // `remove()`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
 //#endregion
+
+async function validateById(req, res, next) {
+  const { id } = req.params
+  try {
+    const results = await DB.get(id);
+
+    // If object for the specified id is not found:
+    if (!results || Object.keys(results).length === 0) {
+      next({ code: 400, message: `Invalid Results for ID: ${id}`});
+    } else {
+      req.results = results;
+      next();
+    }
+  } catch (error) {
+    // If there's an error in retrieving results from the database:
+    console.log(error);
+    next({ code: 500, message: "The information could not be retrieved." });
+  }
+};
 
 module.exports = router;
