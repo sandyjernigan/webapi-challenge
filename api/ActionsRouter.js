@@ -49,7 +49,23 @@ router.get('/:id', validateById, (req, res, next) => {
 
 //#region - UPDATE 
   // `update()`: accepts two arguments, the first is the `id` of the resource to update, and the second is an object with the `changes` to apply. It returns the updated resource. If a resource with the provided `id` is not found, the method returns `null`.
-//#endregion
+
+// 	Updates the specified id using data from the request body. Returns the modified document, NOT the original.
+router.put('/:id', validateById, async (req, res, next) => {
+  try {
+    const updateResults = await DB.update(req.params.id, req.body);
+    if (updateResults) {
+      res.status(200).json(updateResults); // return HTTP status code 200 (OK) and the newly updated resource.
+    } else {
+      next({ code: 404, message: "The project could not be found." });
+    }
+  } catch (error) {
+    // If there's an error when updating the post:
+    console.log(error);
+    next({ code: 500, message: "The project information could not be modified." });
+  }
+});
+  //#endregion
 
 //#region - DELETE 
   // `remove()`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
